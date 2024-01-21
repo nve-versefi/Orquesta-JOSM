@@ -30,7 +30,7 @@ db.once('open', () => {
 app.use(express.json());
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.header('Access-Control-Allow-Origin', 'www.orquestajosm.com'); //Era localhost:4200
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
@@ -44,5 +44,5 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/galeria', express.static(path.join(__dirname, 'galeria')));
 
 app.listen(PORT, () => {
-  console.log(`Servidor en http://localhost:${PORT}`);
+  console.log(`Servidor en www.orquestajosm.com:${PORT}`); //Used to be localhost:3000
 });
