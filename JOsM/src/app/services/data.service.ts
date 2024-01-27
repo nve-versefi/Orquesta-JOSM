@@ -3,16 +3,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError } from 'rxjs';
+import { environment } from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class IntegrantesService {
-  private apiMusicos = 'http://localhost:3000/api/integrantes';
-  private apiDirectiva = 'http://localhost:3000/api/directiva';
-  private apiInfo = 'http://localhost:3000/api/info';
-  private apiGaleria = 'http://localhost:3000/api/galeria';
-  private apiEventos = 'http://localhost:3000/api/eventos';
+  private apiBaseUrl = environment.apiUrl; 
+  private apiMusicos = `${this.apiBaseUrl}/integrantes`;
+  private apiDirectiva = `${this.apiBaseUrl}/directiva`;
+  private apiInfo = `${this.apiBaseUrl}/info`;
+  private apiGaleria = `${this.apiBaseUrl}/galeria`;
+  private apiEventos = `${this.apiBaseUrl}/eventos`;
 
   constructor(private http: HttpClient) {}
   
