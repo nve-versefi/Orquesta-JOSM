@@ -7,6 +7,6 @@ const directivaSchema = new mongoose.Schema({
   direccion: String,
 });
 
-const Directiva = mongoose.model('Directiva', directivaSchema);
+const Directiva = mongoose.model('Directiva', directivaSchema, 'Directiva');
 
 module.exports = Directiva;

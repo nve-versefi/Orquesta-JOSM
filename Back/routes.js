@@ -24,7 +24,7 @@ router.post('/api/integrantes', async (req, res) => {
   });
   
   // Ruta para agregar un nuevo elemento en otra tabla
-  router.post('/api/directiva', async (req, res) => {
+  router.post('/api/directivas', async (req, res) => {
     try {
       const nuevoElemento = new Directiva(req.body);
       await nuevoElemento.save();
@@ -35,7 +35,7 @@ router.post('/api/integrantes', async (req, res) => {
     }
   });
   
-  router.post('/api/galeria', async (req, res) => {
+  router.post('/api/galerias', async (req, res) => {
     try {
       const gal = new Galeria(req.body);
       await gal.save();
@@ -61,7 +61,7 @@ router.post('/api/integrantes', async (req, res) => {
   });
   
   // Ruta para obtener todos los elementos de otra tabla
-  router.get('/api/directiva', async (req, res) => {
+  router.get('/api/directivas', async (req, res) => {
     try {
       const elementos = await Directiva.find();
       res.status(200).json(elementos);
@@ -72,7 +72,7 @@ router.post('/api/integrantes', async (req, res) => {
   });
   
   
-  router.get('/api/galeria', async (req, res) => {
+  router.get('/api/galerias', async (req, res) => {
     try {
       const elementos = await Galeria.find();
       res.status(200).json(elementos);
@@ -83,7 +83,7 @@ router.post('/api/integrantes', async (req, res) => {
   });
   
   
-  router.get('/api/info', async (req, res) => {
+  router.get('/api/infos', async (req, res) => {
     try {
       const elementos = await Info.find();
       res.status(200).json(elementos);

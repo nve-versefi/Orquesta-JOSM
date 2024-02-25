@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 
-const integranteSchema = new mongoose.Schema({
-  Nombre: String,
-  Cargo: String,
-  Linea: String,
-  Descripcion: String,
+const integrantesSchema = new mongoose.Schema({
+  nombre: String,
+  puesto: String,
+  bolsa: String,
+  descripcion: String,
   RedesSociales: String,
   SitioWeb: String,
   CanalYoutube: String
 });
 
-const Integrante = mongoose.model('Integrante', integranteSchema);
+const Integrante = mongoose.model('Integrante', integrantesSchema);
 
 module.exports = Integrante;

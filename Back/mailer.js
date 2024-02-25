@@ -2,61 +2,47 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const router = express.Router();
-
+require('dotenv').config({ path: '../creds.env' });
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
 const transporter = nodemailer.createTransport({
-  host :'smtp.gmail.com',
-  port: 465,
-  secure: true,
-  service: 'gmail',
+  host: process.env.EMAIL_HOST,
+  port: process.env.EMAIL_PORT,
+  secure: true, // true for 465, false for other ports
   auth: {
-    user: 'alonsete.tyr@gmail.com', 
-    pass: 'rdps uxth nlmc vzxf', 
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
   },
 });
 
-transporter.verify().then(() => {
-  console.log("chachi");
-});
 
-router.post('/enviar-correo', (req, res) => {
+router.post('/enviar-correo', async (req, res) => {
   const { name, email, phone, message } = req.body;
 
-  // Configuración del correo
   const mailOptions1 = {
-    from: 'alonsete.tyr@gmail.com', 
-    to: 'alonso.sanz@educa.madrid.org', 
+    from: 'process.env.EMAIL_FROM',
+    to: 'process.env.EMAIL_TO',
     subject: 'Nuevo mensaje desde el formulario',
-    html: `Nombre: ${name}\nCorreo: ${email}\nMensaje: ${message}`,
+    html: `Nombre: ${name}<br>Correo: ${email}<br>Mensaje: ${message}`,
   };
-
-  // Enviar el correo
-  transporter.sendMail(mailOptions1, (error, info) => {
-    if (error) {
-      return res.status(500).send(error.toString());
-    }
-    // Cambia la respuesta en tu servidor
-    res.status(200).json({ message: 'Correo enviado', info: info.response });
-  });
 
   const mailOptions2 = {
-    from: 'alonsete.tyr@gmail.com',
-    to: email, 
-    subject: 'Nuevo mensaje desde la JOsM',
-    html: `Gracias por contactar con la JOsM, ya hemos enviado toda la informacion `,
+    from: 'nicove21@gmail.com',
+    to: email,
+    subject: 'Confirmación de recepción de mensaje',
+    html: `Gracias por contactar con nosotros, hemos recibido tu mensaje.`,
   };
 
-  transporter.sendMail(mailOptions2, (error, info) => {
-    if (error) {
-      return res.status(500).send(error.toString());
-    }
-    // Cambia la respuesta en tu servidor
-    res.status(200).json({ message: 'Correo enviado', info: info.response });
-  });
+  try {
+    const [info1, info2] = await Promise.all([
+      transporter.sendMail(mailOptions1),
+      transporter.sendMail(mailOptions2),
+    ]);
+    res.status(200).json({ message: 'Correos enviados correctamente', info: [info1.response, info2.response] });
+  } catch (error) {
+    res.status(500).send(error.toString());
+  }
 });
-
-
 module.exports = router;

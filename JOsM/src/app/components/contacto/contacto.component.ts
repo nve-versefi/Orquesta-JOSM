@@ -16,7 +16,7 @@ export class ContactoComponent implements OnInit {
   correoInvalido: boolean = false;  // Indica si el correo es inválido
   formFields = [
     { id: 'name', type: 'text', placeholder: 'Nombre' },
-    { id: 'email', type: 'text', placeholder: 'E-MAIL' },
+    { id: 'email', type: 'email', placeholder: 'E-MAIL' },
     { id: 'phone', type: 'tel', placeholder: 'Numero' },
     { id: 'message', type: 'textarea', placeholder: 'Mensaje' }
   ];

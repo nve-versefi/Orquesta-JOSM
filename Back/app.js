@@ -1,3 +1,4 @@
+require('dotenv').config({ path: '../creds.env' });
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -5,35 +6,29 @@ const routes = require('./routes');
 const mailer = require('./mailer');
 const path = require('path'); 
 
-
 const app = express();
-
 app.use(cors());
 
 const PORT = process.env.PORT || 3000;
 
-mongoose.connect('mongodb://127.0.0.1:27017/integrantes-db', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// Dynamically encode the password and build the URI
+const username = encodeURIComponent(process.env.DB_USERNAME);
+const password = encodeURIComponent(process.env.DB_PASSWORD);
+const clusterAddress = process.env.DB_CLUSTER_ADDRESS;
+const databaseName = process.env.DB_NAME;
 
-const db = mongoose.connection;
+const atlasUri = `mongodb+srv://${username}:${password}@${clusterAddress}/${databaseName}?retryWrites=true&w=majority`;
 
-db.on('error', (error) => {
+mongoose.connect(atlasUri, {
+}).then(() => {
+  console.log('Conexión exitosa a MongoDB Atlas');
+}).catch((error) => {
   console.error('Error de conexión a MongoDB:', error);
-});
-
-db.once('open', () => {
-  console.log('Conexión exitosa a MongoDB');
 });
 
 app.use(express.json());
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'www.orquestajosm.com'); //Era localhost:4200
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
+
 
 app.use('/', routes);
 
@@ -44,5 +39,5 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/galeria', express.static(path.join(__dirname, 'galeria')));
 
 app.listen(PORT, () => {
-  console.log(`Servidor en www.orquestajosm.com:${PORT}`); //Used to be localhost:3000
+  console.log(`Servidor en www.orquestajosm.com:${PORT}`);
 });
