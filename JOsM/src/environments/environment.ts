@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    apiUrl: 'http://localhost:4200/api', // URL del servidor de desarrollo
+    apiUrl: 'https://josm-backend-6599f0686bc6.herokuapp.com/api', // URL del servidor de desarrollo
   };

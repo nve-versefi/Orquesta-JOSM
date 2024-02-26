@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'http://www.orquestajosm.com/api', // URL del servidor de desarrollo
+    apiUrl: '${process.env.API_URL}' , // URL del servidor de desarrollo
   };

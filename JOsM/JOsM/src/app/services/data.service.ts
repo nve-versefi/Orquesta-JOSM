@@ -9,7 +9,7 @@ import { environment } from '../environments/environment';
   providedIn: 'root',
 })
 export class IntegrantesService {
-  private apiBaseUrl = environment.apiUrl; 
+  private  apiBaseUrl = environment.apiUrl; 
   private apiMusicos = `${this.apiBaseUrl}/integrantes`;
   private apiDirectiva = `${this.apiBaseUrl}/directiva`;
   private apiInfo = `${this.apiBaseUrl}/info`;
