@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';  // Actualiza esta importación
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 interface FormularioData {
   [key: string]: string;
 }
