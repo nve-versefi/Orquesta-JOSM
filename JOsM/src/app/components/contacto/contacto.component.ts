@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';  // Actualiza esta importación
-
+import { environment } from 'src/environments/environment.prod';
 interface FormularioData {
   [key: string]: string;
 }
@@ -46,7 +46,7 @@ export class ContactoComponent implements OnInit {
   }
   enviarCorreo(formularioData: FormularioData) {
     
-    this.http.post('http://localhost:3000/enviar-correo', {
+    this.http.post(environment.apiUrl, {
       name: formularioData['name'],
       email: formularioData['email'],
       message: formularioData['message'],
