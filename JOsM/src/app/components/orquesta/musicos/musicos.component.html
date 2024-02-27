@@ -1,6 +1,6 @@
 <app-page-title [mainHeading]="heading"></app-page-title>
 <div class="personas" >
-  <div class="container" *ngFor="let instrumento of instrumentos; let i = index"  (click)="openPopup(instrumento)"  [style.background-image]="'url(' + instrumento.imagen + ')'"> 
+  <div class="container" *ngFor="let instrumento of instrumentos; let i = index"  (click)="openPopup(instrumento)"  [style.background-image]="'https://josm-backend-6599f0686bc6.herokuapp.com/(' + instrumento.imagen + ')'"> 
  
     <div class="inf">
     <h1 class="nombre">{{ instrumento.nombre }}</h1>
