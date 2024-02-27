@@ -46,7 +46,7 @@ export class ContactoComponent implements OnInit {
   }
   enviarCorreo(formularioData: FormularioData) {
     
-    this.http.post('${process.env.API_URL}', {
+    this.http.post('http://localhost:3000/enviar-correo', {
       name: formularioData['name'],
       email: formularioData['email'],
       message: formularioData['message'],
@@ -55,7 +55,7 @@ export class ContactoComponent implements OnInit {
       next: (response: any) => {
         console.log('Respuesta del servidor:', response);
         console.log('Correo enviado:', response);
-        this.correoEnviado = true;  
+        this.correoEnviado = true;  // Marcar el correo como enviado
       },
       error: (error: any) => {
         console.error('Error al enviar el correo:', error);
